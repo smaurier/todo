@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Item from './components/item';
 
 function App() {
-  const [item, setItem] = useState([{ text: 'Apprendre JS' }]);
+  const [items, setItem] = useState(['Apprendre JS','Dormir', 'Manger','Aller au sport']);
 
   return (
     <>
@@ -14,10 +14,9 @@ function App() {
         Le but de cette todoList est de créer, supprimer ou modifier une todoList et pouvoir la conserver, voir le localstorage
       </p>
       <ul>
-        <Item activity={this.state.item}></Item>
-        <Item activity='Dormir '></Item>
-        <Item activity='Manger '></Item>
-        <Item activity='Aller au sport '></Item>
+        {items.map((item) => (
+          <Item activity={item}></Item>
+        ))}
       </ul>
 
       <button>Ajouter une activité</button>
