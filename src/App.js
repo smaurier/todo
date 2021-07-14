@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import Item from './components/item';
 
 function App() {
-  const [items, setItem] = useState(['Apprendre JS','Dormir', 'Manger','Aller au sport']);
+  const [items, setItem] = useState([{id: 1,name:'Apprendre JS'},{id: 2,name:'Dormir'}, {id: 3,name:'Manger'},{id: 4,name:'Aller au sport'}]);
+
+  function deleteItem(id) {   console.log(`le lien pour l'id ${id} a été cliqué`);  }
 
   return (
     <>
@@ -15,7 +17,7 @@ function App() {
       </p>
       <ul>
         {items.map((item) => (
-          <Item activity={item}></Item>
+          <Item key={item.id} activity={item.name} delete={deleteItem}></Item>
         ))}
       </ul>
 

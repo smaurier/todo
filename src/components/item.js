@@ -2,7 +2,7 @@ function Item(props) {
   return (
     <li>
         {props.activity}
-        <button>supprimer</button>
+        <button onClick={() => props.delete(props.key)}>supprimer</button>
         <button>editer</button>
     </li>  
   );
