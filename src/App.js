@@ -1,11 +1,22 @@
 import './App.css';
 import React, { useState } from 'react';
 import Item from './components/item';
+import _ from 'lodash';
 
 function App() {
-  const [items, setItem] = useState([{id: 1,name:'Apprendre JS'},{id: 2,name:'Dormir'}, {id: 3,name:'Manger'},{id: 4,name:'Aller au sport'}]);
+  const [items, setItems] = useState([{id: 1,name:'Apprendre JS'},{id: 2,name:'Dormir'}, {id: 3,name:'Manger'},{id: 4,name:'Aller au sport'}]);
 
-  function deleteItem(id) {   console.log(`le lien pour l'id ${id} a été cliqué`);  }
+  function deleteItem(id) {
+    setItems(items.filter((item) => item.id !== id))
+  }
+
+  function addItem() {
+    const newActivity = {id: 5, name:'Parler de Dieu avec Benjamin'}
+    const newItems = _.cloneDeep(items)
+
+    newItems.push(newActivity)
+    setItems(newItems)
+  }
 
   return (
     <>
@@ -16,12 +27,19 @@ function App() {
         Le but de cette todoList est de créer, supprimer ou modifier une todoList et pouvoir la conserver, voir le localstorage
       </p>
       <ul>
-        {items.map((item) => (
-          <Item key={item.id} activity={item.name} delete={deleteItem}></Item>
+        {items.map((item, index) => (
+          <Item key={index} id={item.id} activity={item.name} delete={deleteItem}/>
         ))}
       </ul>
 
-      <button>Ajouter une activité</button>
+      <form>
+        <label>
+          Nom activité :
+          <input type="text" name="name" />
+        </label>
+        <button type="submit" onClick={() => addItem()}>Ajouter une activité</button>
+      </form>
+      
     </>
   );
 }
